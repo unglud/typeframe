@@ -3,11 +3,14 @@ import { User } from './models/User';
 const user = new User({ name: 'my name', age: 20 });
 
 user.on('change', () => {
+    console.log(`chane1`);
 })
-user.on('change', () => {
+user.on('change', () => {]
+    console.log(`chane2`);
 })
 
-user.on('bla', () => {
+user.on('save', () => {
+    console.log(`save triggered`);
 })
 
-console.log(`user`, user);
+user.trigger('saasdfve')
