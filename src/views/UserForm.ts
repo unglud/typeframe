@@ -6,7 +6,7 @@ export class UserForm {
   }
 
   bindModel = (): void => {
-    this.model.on("change", ()=>this.render());
+    this.model.on("change", () => this.render());
   };
 
   template(): string {
@@ -33,9 +33,11 @@ export class UserForm {
   };
 
   onSetNameClick = (): void => {
-    const input = this.parent.querySelector('input')!;
-    const name = input.value;
-    this.model.set({name})
+    const input = this.parent.querySelector("input");
+    if (input) {
+      const name = input.value;
+      this.model.set({ name });
+    }
   };
 
   bindEvents(fragment: DocumentFragment): void {
@@ -50,12 +52,11 @@ export class UserForm {
   }
 
   render(): void {
-    this.parent.innerHTML = '';
+    this.parent.innerHTML = "";
     const templateElement = document.createElement("template");
     templateElement.innerHTML = this.template();
 
     this.bindEvents(templateElement.content);
     this.parent.append(templateElement.content);
   }
-
 }
