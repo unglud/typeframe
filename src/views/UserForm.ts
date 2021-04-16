@@ -2,8 +2,21 @@ export class UserForm {
   constructor(public parent: Element) {}
 
   template(): string {
-    return `<div><h1>User Form</h1><input /></div>`;
+    return `
+<div>
+    <h1>User Form</h1>
+    <input />
+    <button>Click me</button>
+</div>`;
   }
+
+  eventsMap(): { [key: string]: () => void } {
+    return {
+      "click:button": this.onButtonClick,
+    };
+  }
+
+  onButtonClick(): void {}
 
   render(): void {
     const templateElement = document.createElement("template");
