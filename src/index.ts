@@ -1,11 +1,18 @@
-import { UserForm } from "./views/UserForm";
-import { User } from "./models/User";
-import { UserEdit } from './views/UserEdit';
+import { User, UserProps } from "./models/User";
+import { Collection } from "./models/Collection";
+import { UserList } from "./views/UserList";
 
-const userForm = new UserEdit(
-  document.getElementById("root")!,
-  User.buildUser({ name: "NAME", age:20 })
+const users = new Collection<User, UserProps>(
+  "http://localhost:3000/users",
+  User.buildUser
 );
 
-userForm.render();
-console.log(`userForm`, userForm);
+users.on("change", () => {
+  const root = document.getElementById("root");
+
+  if (root) {
+    new UserList(root, users).render();
+  }
+});
+
+users.fetch();
